@@ -6,7 +6,7 @@ on:
       - 'master'
       
 jobs:
-  build-netfx:
+  docker:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@master
@@ -14,8 +14,8 @@ jobs:
         working-directory: .
         run: |
           docker login -u $env:USER -p $env:TOKEN
-          docker build -t buildtools:latest -m 2GB .
-          docker image push hahaleyile/buildtools:latest
+          docker build -t hahaleyile/buildtools:latest -m 2GB .
+          docker push hahaleyile/buildtools:latest
           docker logout
         env:
           USER: ${{ secrets.DOCKERHUB_USERNAME }}
